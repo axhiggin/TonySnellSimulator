@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tony Snell Simulator</title>
+    
+    <style>
+        @font-face{
+            font-family: myFont;
+            src: url(./assets/font/PixgamerRegular-OVD6A.ttf)
+        }
+        body{
+            background-color: #FACADE;
+            font-family: myFont;
+        }
+        canvas {
+            border: 2px solid beige;
+        }
+    </style>
+</head>
+<body>
+    <div>FontLoad</div>
+    <script type="text/javascript" src="./lib/phaser.js"></script>
+    <script type="text/javascript" src="./src/scenes/Load.js"></script>
+    <script type="text/javascript" src="./src/scenes/Title.js"></script>
+    <script type="text/javascript" src="./src/scenes/Play.js"></script>
+    <script type="text/javascript" src="./src/scenes/GameOver.js"></script>
+    <script type="text/javascript" src="./src/main.js"></script>
+</body>
+</html>
