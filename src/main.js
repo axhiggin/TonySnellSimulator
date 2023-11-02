@@ -2,7 +2,7 @@ let config = {
     type: Phaser.AUTO,
     height: 960,
     width: 640,
-    backgroundColor: 0xFFFFFF,
+    backgroundColor: 0xf5f5dc,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
@@ -30,6 +30,6 @@ let defenderHeight = 32
 let defenderWidth = 32
 let tonyHeight = 32
 let tonyWidth = 20
-let scrollSpeed = 50
-// let Defender
-// let Cone
+let scrollSpeed = 200
+let playerVelocity = 50
+let defenderSpeed = 35
