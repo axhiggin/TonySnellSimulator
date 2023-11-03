@@ -4,10 +4,15 @@ class Play extends Phaser.Scene{
     }
 
     create() {
+        // initize some stuff
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
         this.score = 0
-        console.log('welcome to play scene')
+
+        this.scrollBG = this.add.tileSprite(320, 480, 640, 960, 'court')
+
+
+        //add the player sprite
         this.player = this.physics.add.sprite(game.config.width/2, game.config.height*18/20, 'player').setOrigin(0.5).setScale(3)
         this.player.body.setSize(17, 32).setOffset(11, 0)
         this.player.setCollideWorldBounds(true);
@@ -27,17 +32,21 @@ class Play extends Phaser.Scene{
         })
         this.player.play('dribble', true)
 
+
+        //defender stuff
         this.defenderGroup = this.add.group({
             runChildUpdate: true
         })
 
-        console.log(this.defenderGroup.runChildUpdate)
+        console.log(this.defenderGroup.runChildUpdate) //debug
 
         this.addDefender()
+        this.time.delayedCall(100000, this.addCone(), null, this)
 
         this.physics.add.collider(this.player, this.defenderGroup, (player, defender) => 
         {
             console.log('HIT')
+            this.scene.start('gameOverScene')
         })
     }
 
@@ -51,13 +60,24 @@ class Play extends Phaser.Scene{
                 this.player.body.velocity.x += playerVelocity
             }
         }
+
+        this.scrollBG.tilePositionY -= 0.5
+
+        if(this.score > highscore){
+            highscore = this.score
+        }
     }
 
 
     addDefender() {
         let speedVariance = Phaser.Math.Between(0, 30)
-        let defender = new Defender(this, scrollSpeed - speedVariance, defenderSpeed)
+        let defender = new Defender(this, scrollSpeed + speedVariance, defenderSpeed)
         this.defenderGroup.add(defender)
+    }
+
+    addCone(){
+        let cone = new Cone(this, scrollSpeed, defenderSpeed)
+        this.defenderGroup.add(cone)
     }
 }
 

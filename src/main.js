@@ -33,3 +33,5 @@ let tonyWidth = 20
 let scrollSpeed = 200
 let playerVelocity = 50
 let defenderSpeed = 35
+let scrollBG
+let highscore = 0

@@ -37,7 +37,7 @@ class Defender extends Phaser.Physics.Arcade.Sprite{
         if(this.y > game.config.height){
             this.destroy()
             this.parentScene.score += this.pointValue
-            console.log(this.parentScene.score)
+            console.log(this.parentScene.score) //debug
         }
     }
 
