@@ -16,7 +16,8 @@ class Load extends Phaser.Scene {
             loadingBar.destroy();
         });
 
-        this.load.image('court', './assets/image/Court.png')
+        this.load.image('credits', './assets/image/Credits.png')
+        this.load.image('court', './assets/image/court2.png')
         this.load.image('cone', './assets/image/ChrisPaul.png')
         this.load.spritesheet('defender', './assets/image/BasketballDefender.png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('player', './assets/image/BasketballMan.png', {frameWidth: 32, frameHeight:32})

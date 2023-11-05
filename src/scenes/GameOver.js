@@ -19,6 +19,12 @@ class GameOver extends Phaser.Scene{
         this.add.text(game.config.width/2, game.config.height*3/8, 'You Losed', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2, 'press space to start', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height*2/3, 'Highscore: ' + highscore, menuConfig).setOrigin(0.5)
+
+        this.creditButton = this.add.text(game.config.width * 8/10, game.config.height * 19/20, 'CREDITS', scoreConfig)
+        this.creditButton.setInteractive()
+        this.creditButton.on('pointerdown', () => {this.scene.start('creditScene')})
+
+
         this.sound.play('wompwomp', {volume: 0.05})
     }
 
@@ -26,5 +32,9 @@ class GameOver extends Phaser.Scene{
         if (Phaser.Input.Keyboard.JustDown(spaceKey)){
             this.scene.start('playScene')
         }
+    }
+
+    press() {
+        console.log('pressed')
     }
 }

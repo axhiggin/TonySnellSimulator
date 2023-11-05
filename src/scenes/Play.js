@@ -76,6 +76,8 @@ class Play extends Phaser.Scene{
         //levels
         this.prelevel = this.level
         this.level = Math.floor(this.score/10)
+        
+        //level up
         if(this.prelevel < this.level){
             //print LEVEL UP message
             if(this.level % 5 == 0){
@@ -105,7 +107,7 @@ class Play extends Phaser.Scene{
             }
         }
 
-        this.scrollBG.tilePositionY -= (0.5 + this.level/10)
+        this.scrollBG.tilePositionY -= (scrollSpeed/163)
 
         if(this.score > highscore){
             highscore = this.score
@@ -113,7 +115,6 @@ class Play extends Phaser.Scene{
     }
 
 
-    //make scrollspeed dependant on level !!!!!
     addDefender() {
         let speedVariance = Phaser.Math.Between(0, 30)
         let defender = new Defender(this, scrollSpeed + speedVariance, defenderSpeed + this.level)
