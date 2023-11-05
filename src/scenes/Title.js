@@ -7,7 +7,7 @@ class Title extends Phaser.Scene{
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         let menuConfig = {
             fontFamily: 'myFont',
-            color: 0xFACADE,
+            color: 0x000001,
             fontSize: '60px',
             align: 'right',
             padding: {

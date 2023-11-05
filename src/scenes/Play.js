@@ -11,6 +11,10 @@ class Play extends Phaser.Scene{
 
         this.scrollBG = this.add.tileSprite(320, 480, 640, 960, 'court')
 
+        scrollSpeed = 200
+        playerVelocity = 50
+        defenderSpeed = 35
+
 
         //add the player sprite
         this.player = this.physics.add.sprite(game.config.width/2, game.config.height*18/20, 'player').setOrigin(0.5).setScale(3)
@@ -40,18 +44,35 @@ class Play extends Phaser.Scene{
 
         console.log(this.defenderGroup.runChildUpdate) //debug
 
-        this.addDefender()
-        this.time.delayedCall(100000, this.addCone(), null, this)
+        this.time.delayedCall(200, () => {
+            this.spawnEnemy()
+        })
+        
 
         this.physics.add.collider(this.player, this.defenderGroup, (player, defender) => 
         {
             console.log('HIT')
             this.scene.start('gameOverScene')
         })
+
+        //levels and stuff
+        this.level = 0
+
     }
 
 
     update(){
+        //levels
+        this.prelevel = this.level
+        this.level = Math.floor(this.score/10)
+        if(this.prelevel < this.level){
+            //print LEVEL UP message
+            console.log('LEVEL UP')
+            scrollSpeed *= 1.1
+        }
+        
+
+
         if(this.player){
             if(keyA.isDown){
                 this.player.body.velocity.x -= playerVelocity
@@ -61,7 +82,7 @@ class Play extends Phaser.Scene{
             }
         }
 
-        this.scrollBG.tilePositionY -= 0.5
+        this.scrollBG.tilePositionY -= (0.5 + this.level/10)
 
         if(this.score > highscore){
             highscore = this.score
@@ -69,15 +90,29 @@ class Play extends Phaser.Scene{
     }
 
 
+    //make scrollspeed dependant on level !!!!!
     addDefender() {
         let speedVariance = Phaser.Math.Between(0, 30)
-        let defender = new Defender(this, scrollSpeed + speedVariance, defenderSpeed)
+        let defender = new Defender(this, scrollSpeed + speedVariance, defenderSpeed + this.level)
         this.defenderGroup.add(defender)
     }
 
-    addCone(){
-        let cone = new Cone(this, scrollSpeed, defenderSpeed)
+    addCone() {
+        let cone = new Cone(this, scrollSpeed)
         this.defenderGroup.add(cone)
+    }
+
+    spawnEnemy() {
+        if(Math.random()< 0.5){
+            this.addDefender()
+        }
+        else{
+            this.addCone()
+        }
+        console.log(this.time)
+        this.time.delayedCall(2000/(1 + (this.level*0.01)), () => { 
+            this.spawnEnemy(); 
+        })
     }
 }
 
