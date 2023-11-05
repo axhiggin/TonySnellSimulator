@@ -17,7 +17,7 @@ class GameOver extends Phaser.Scene{
             fixedWidth: 0
         }
         this.add.text(game.config.width/2, game.config.height*3/8, 'You Lost', menuConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2, 'press space to start', menuConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2, 'press space to try again', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height*2/3, 'Highscore: ' + highscore, menuConfig).setOrigin(0.5)
 
         this.creditButton = this.add.text(game.config.width * 8/10, game.config.height * 19/20, 'CREDITS', scoreConfig)
