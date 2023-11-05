@@ -16,7 +16,7 @@ class GameOver extends Phaser.Scene{
             },
             fixedWidth: 0
         }
-        this.add.text(game.config.width/2, game.config.height*3/8, 'You Losed', menuConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height*3/8, 'You Lost', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2, 'press space to start', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height*2/3, 'Highscore: ' + highscore, menuConfig).setOrigin(0.5)
 
