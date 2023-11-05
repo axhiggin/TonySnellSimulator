@@ -20,7 +20,11 @@ class Load extends Phaser.Scene {
         this.load.image('cone', './assets/image/ChrisPaul.png')
         this.load.spritesheet('defender', './assets/image/BasketballDefender.png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('player', './assets/image/BasketballMan.png', {frameWidth: 32, frameHeight:32})
-
+        this.load.audio('wompwomp', './assets/audio/womp-womp.mp3')
+        this.load.audio('music', './assets/audio/Cipher.mp3')
+        this.load.audio('point', './assets/audio/point.mp3')
+        this.load.audio('levelUp', './assets/audio/levelUp.mp3')
+        this.load.audio('LBJ', './assets/audio/LEBRON.mp3')
 
     }
 

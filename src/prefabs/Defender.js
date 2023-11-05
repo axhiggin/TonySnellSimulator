@@ -22,7 +22,7 @@ class Defender extends Phaser.Physics.Arcade.Sprite{
         this.setImmovable(true)
         this.setScale(3)
         this.body.setSize(23, 32).setOffset(5, 0)
-        console.log(this.parentScene.score)
+        // console.log(this.parentScene.score)
 
     }
     update() {
@@ -37,6 +37,11 @@ class Defender extends Phaser.Physics.Arcade.Sprite{
         if(this.y > game.config.height){
             this.destroy()
             this.parentScene.score += this.pointValue
+            this.scoreAdd = this.parentScene.add.text(this.x, this.y * 0.9 , '+ 2', levelUpConfig)
+            this.parentScene.time.delayedCall(1000, () => {
+                this.scoreAdd.destroy()
+            })
+            this.parentScene.sound.play('point', {volume: 0.1})
             console.log(this.parentScene.score) //debug
         }
     }

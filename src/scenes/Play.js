@@ -4,6 +4,10 @@ class Play extends Phaser.Scene{
     }
 
     create() {
+        //MUSIC
+        this.bgm = this.sound.add('music', {loop: true, volume: 0.05})
+        this.bgm.play()
+
         // initize some stuff
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
@@ -11,6 +15,7 @@ class Play extends Phaser.Scene{
 
         this.scrollBG = this.add.tileSprite(320, 480, 640, 960, 'court')
 
+        //make sure globals are reset
         scrollSpeed = 200
         playerVelocity = 50
         defenderSpeed = 35
@@ -52,23 +57,41 @@ class Play extends Phaser.Scene{
         this.physics.add.collider(this.player, this.defenderGroup, (player, defender) => 
         {
             console.log('HIT')
+            this.bgm.stop()
             this.scene.start('gameOverScene')
         })
 
         //levels and stuff
         this.level = 0
 
+        //display score!
+        this.scoreText = this.add.text(game.config.width/15, game.config.height/25, "Score: " + this.score, scoreConfig)
+
     }
 
 
     update(){
+        this.scoreText.text = "Score: " + this.score
+
         //levels
         this.prelevel = this.level
         this.level = Math.floor(this.score/10)
         if(this.prelevel < this.level){
             //print LEVEL UP message
+            if(this.level % 5 == 0){
+                this.sound.play('LBJ', {volume: 0.1})
+            }
+            else{
+                this.sound.play('levelUp', {volume: 0.1})
+            }
+            
             console.log('LEVEL UP')
+            this.levelUpText = this.add.text(this.player.x, this.player.y * 0.9, 'LEVEL UP!', levelUpConfig)
+            this.time.delayedCall(1000, () => {
+                this.levelUpText.destroy()
+            })
             scrollSpeed *= 1.1
+        
         }
         
 
@@ -109,7 +132,6 @@ class Play extends Phaser.Scene{
         else{
             this.addCone()
         }
-        console.log(this.time)
         this.time.delayedCall(2000/(1 + (this.level*0.01)), () => { 
             this.spawnEnemy(); 
         })

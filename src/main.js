@@ -35,3 +35,19 @@ let playerVelocity = 50
 let defenderSpeed = 35
 let scrollBG
 let highscore = 0
+let levelUpConfig = {
+    fontFamily: 'myFont',
+    fontSize: '28px',
+    color: '#000001',
+    align: 'left',
+    padding: {
+      top: 5,
+      bottom: 5,
+    },
+    fixedWidth: 100
+  }
+let scoreConfig = {
+    fontFamily: 'myFont',
+    fontSize: '40px',
+    color: 0x000001
+}
